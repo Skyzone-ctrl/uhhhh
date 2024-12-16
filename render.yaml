@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: yt-downloader
+    env: node
+    buildCommand: npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: 18.0.0
+      - key: PUPPETEER_SKIP_CHROMIUM_DOWNLOAD
+        value: true
+      - key: PUPPETEER_EXECUTABLE_PATH
+        value: /usr/bin/google-chrome-stable
+    scaling:
+      minInstances: 1
+      maxInstances: 1
+    healthCheckPath: /
+    buildFilter:
+      paths:
+        - package.json
+        - server.js
+        - install-dependencies.js
