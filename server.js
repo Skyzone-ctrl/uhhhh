@@ -20,7 +20,7 @@ app.use(express.static(path.join(__dirname)));
 
 // PRD Generation Route
 app.post('/generate-prd', async (req, res) => {
-    const { productName, category, targetAudience, coreIdea, keyFeatures, techStack } = req.body;
+    const { productName, category, targetAudience, coreIdea, keyFeatures, techStack, strength } = req.body;
 
     if (!productName || !coreIdea) {
         return res.status(400).json({ error: 'Product Name and Core Idea are required.' });
@@ -31,61 +31,60 @@ app.post('/generate-prd', async (req, res) => {
         return res.status(500).json({ error: 'Kilo API key is missing on the server.' });
     }
 
-    // Build a highly structured but concise prompt for the PRD
-    const systemPrompt = `You are an expert Principal Product Manager.
-Your task is to generate an exceptionally professional and comprehensive Product Requirement Document (PRD) in Indonesian language.
-The PRD must be outstanding, fully elaborated, structured, and visually clean. Use Markdown formatting.
-Keep the output comprehensive but concise (around 1000 words) so it generates quickly.
+    // Determine custom focus instructions based on "Coffee Strength" (strength focus)
+    let focusInstructions = '';
+    if (strength === 'latte') {
+        focusInstructions = `Focus Level: LATTE (User-centric & Product-focused).
+- Highlight User Personas and step-by-step User Journeys.
+- Keep the technical database schema and APIs lightweight.`;
+    } else if (strength === 'espresso') {
+        focusInstructions = `Focus Level: ESPRESSO (Ultra Technical & Backend-dense).
+- Provide a brief Database Schema draft and key API endpoints.
+- Highlight security models and rate limiting.`;
+    } else {
+        focusInstructions = `Focus Level: CAPPUCCINO (Perfectly Balanced).
+- Provide a balanced overview of personas, functional tables, and tech stack.`;
+    }
 
-Structure the PRD with these sections:
+    // Build a highly structured but extremely concise prompt for the PRD (max 400 words)
+    const systemPrompt = `You are an expert Product Manager.
+Generate a concise, professional, and elegant Product Requirement Document (PRD) in Indonesian language.
+IMPORTANT: To avoid timeouts, keep the entire response highly compact, clean, and fast (MAXIMUM 400 words). Use small tables and brief lists.
 
+${focusInstructions}
+
+Structure:
 # PRODUCT REQUIREMENT DOCUMENT (PRD)
 ## ${productName} - Specifications
 
----
-
 ### 1. EXECUTIVE SUMMARY & VISION
-- **Executive Summary**: A concise elevator pitch and summary of the product.
-- **Vision Statement**: The long-term impact and ultimate goal of this product.
-- **Problem Statement**: The exact pain points of the user this product solves.
-- **Value Proposition**: Why users will choose this product over alternatives.
+- **Executive Summary**: Brief pitch.
+- **Problem & Solution**: Quick description.
 
-### 2. TARGET AUDIENCE & USER PERSONAS
-- **Target Market**: The demographics or user segments.
-- **User Personas**: Detail at least two concise user personas (Name, Role, Goals, Pain Points).
+### 2. TARGET AUDIENCE & PERSONAS
+- Short user segments and 1 key persona.
 
-### 3. USER JOURNEY & FLOWS
-- Step-by-step user journey from onboarding to achieving their core goal.
-- Present a textual flow map using arrows (e.g. [Onboarding] -> [Dashboard] -> [Core Action]).
+### 3. USER JOURNEY
+- Brief step-by-step flow map (e.g. [Onboarding] -> [Core Action]).
 
 ### 4. FUNCTIONAL REQUIREMENTS
-Create a structured markdown table of requirements:
-| ID | Feature / Module | Requirement Description | Priority (Must/Should/Could) | Acceptance Criteria |
-Fill this table with specific functional items.
+A small table:
+| ID | Feature | Priority | Brief Acceptance Criteria |
 
-### 5. NON-FUNCTIONAL REQUIREMENTS
-- **Performance & Scalability**: Latency, load expectations.
-- **Security & Compliance**: Encryption, authentication (JWT, OAuth), role-based access control.
+### 5. TECHNICAL ARCHITECTURE
+- Recommended Stack: List elements.
+- Short database & API draft (1 key endpoint).
 
-### 6. TECHNICAL ARCHITECTURE & STACK
-- Recommended tech stack with quick rationales.
-- Database Schema Draft: A textual description of key database tables, fields, and relations.
-- API Design Draft: At least 3 key RESTful endpoints with Method, Path, and brief structures.
+### 6. KEY METRICS & ROADMAP
+- 2 key KPIs and simple MVP scope.`;
 
-### 7. RELEASE ROADMAP & PHASES
-- **Phase 1: MVP (Minimum Viable Product)**: What is included and what is excluded.
-- **Phase 2: Post-Launch & Scaling**: Upcoming features.
-
-### 8. KEY METRICS & SUCCESS CRITERIA
-- List of specific KPIs (e.g. DAU, retention rates) with target numbers.`;
-
-    const userPrompt = `Generate a Product Requirement Document (PRD) for:
+    const userPrompt = `Generate a compact, short, and premium PRD for:
 - **Product Name**: ${productName}
-- **Category**: ${category || 'General Software'}
+- **Category**: ${category || 'Software'}
 - **Target Audience**: ${targetAudience || 'General Users'}
 - **Core Idea**: ${coreIdea}
-- **Key Features**: ${keyFeatures || 'Standard modern software features'}
-- **Tech Stack Preference**: ${techStack || 'To be recommended by AI'}`;
+- **Key Features**: ${keyFeatures || 'Standard features'}
+- **Tech Stack**: ${techStack || 'Recommended'}`;
 
     const generateRequest = async (modelId) => {
         return await axios.post('https://api.kilo.ai/api/gateway/chat/completions', {
@@ -104,7 +103,7 @@ Fill this table with specific functional items.
     };
 
     try {
-        console.log(`Generating PRD for ${productName} using kilo-auto/free...`);
+        console.log(`Generating PRD for ${productName} (Strength: ${strength || 'cappuccino'}) using kilo-auto/free...`);
         let response;
         try {
             response = await generateRequest('kilo-auto/free');

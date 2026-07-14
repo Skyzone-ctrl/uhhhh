@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prd-maker by Noone-Dev</title>
+    <title>Prd-maker by Noone-Dev | Cozy Café Edition</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -12,19 +12,27 @@
                 extend: {
                     fontFamily: {
                         sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
                     },
                     colors: {
-                        brand: {
-                            50: '#f4f3ff',
-                            100: '#ebe9fe',
-                            200: '#dad6fe',
-                            300: '#bfb5fd',
-                            400: '#9e8bfa',
-                            500: '#7c5dfa',
-                            600: '#6c3ff5',
-                            700: '#5a2be3',
-                            800: '#4c22c0',
-                            900: '#3e1b9f',
+                        cafe: {
+                            50: '#faf8f5',   /* Linen/Cream soft */
+                            100: '#f5efe6',  /* Warm milk */
+                            200: '#e6dfd3',  /* Soft Latte */
+                            300: '#d4a373',  /* Warm Caramel */
+                            400: '#bb8a52',  /* Rich Caramel */
+                            500: '#8c6239',  /* Soft Coffee Brown */
+                            600: '#734f2d',  /* Medium Roast */
+                            700: '#5c3d21',  /* Dark Roast */
+                            800: '#3d2511',  /* Espresso Black-brown */
+                            900: '#1d1005',  /* Charcoal Bean */
+                        },
+                        matcha: {
+                            100: '#f1f5f0',
+                            200: '#e1ebd9',
+                            500: '#8f9e8b',
+                            700: '#5d6b59',
                         }
                     }
                 }
@@ -34,7 +42,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Marked.js Markdown Parser -->
@@ -42,55 +50,62 @@
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #0b0f19;
+            background-color: #faf8f5;
             background-image:
-                radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%),
-                radial-gradient(at 50% 0%, hsla(255,96%,12%,0.2) 0, transparent 50%),
-                radial-gradient(at 100% 100%, hsla(253,16%,7%,1) 0, transparent 50%);
+                radial-gradient(at 0% 0%, rgba(245,239,230,0.6) 0, transparent 60%),
+                radial-gradient(at 100% 0%, rgba(212,163,115,0.1) 0, transparent 50%),
+                radial-gradient(at 50% 100%, rgba(140,98,57,0.05) 0, transparent 70%);
         }
 
-        /* Markdown rendering custom styles */
+        .font-serif-title {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Café Styled Markdown output */
         .prd-content {
-            color: #d1d5db;
-            line-height: 1.75;
+            color: #3d2511;
+            line-height: 1.8;
+            font-size: 0.95rem;
         }
         .prd-content h1 {
-            font-size: 2.25rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
             font-weight: 800;
             margin-top: 2rem;
             margin-bottom: 1.25rem;
-            color: #ffffff;
-            border-bottom: 2px solid #374151;
+            color: #1d1005;
+            border-bottom: 2px solid #e6dfd3;
             padding-bottom: 0.5rem;
-            letter-spacing: -0.025em;
+            letter-spacing: -0.02em;
         }
         .prd-content h2 {
-            font-size: 1.75rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
             font-weight: 700;
             margin-top: 1.75rem;
             margin-bottom: 1rem;
-            color: #f3f4f6;
-            letter-spacing: -0.025em;
+            color: #3d2511;
+            letter-spacing: -0.01em;
         }
         .prd-content h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
+            font-size: 1.15rem;
+            font-weight: 700;
             margin-top: 1.5rem;
             margin-bottom: 0.75rem;
-            color: #e5e7eb;
+            color: #5c3d21;
         }
         .prd-content p {
-            margin-bottom: 1rem;
+            margin-bottom: 1.15rem;
         }
         .prd-content ul {
             list-style-type: disc;
             padding-left: 1.5rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.15rem;
         }
         .prd-content ol {
             list-style-type: decimal;
             padding-left: 1.5rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.15rem;
         }
         .prd-content li {
             margin-bottom: 0.5rem;
@@ -100,100 +115,126 @@
             border-collapse: collapse;
             margin: 1.5rem 0;
             font-size: 0.875rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.03);
         }
         .prd-content th {
-            background-color: #1f2937;
-            color: #ffffff;
-            font-weight: 600;
+            background-color: #f5efe6;
+            color: #3d2511;
+            font-weight: 700;
             text-align: left;
             padding: 0.75rem 1rem;
-            border: 1px solid #374151;
+            border: 1px solid #e6dfd3;
         }
         .prd-content td {
             padding: 0.75rem 1rem;
-            border: 1px solid #374151;
-            color: #9ca3af;
+            border: 1px solid #e6dfd3;
+            color: #5c3d21;
+            background-color: #faf8f5;
         }
         .prd-content tr:nth-child(even) td {
-            background-color: #111827;
+            background-color: #ffffff;
         }
         .prd-content blockquote {
-            border-left: 4px solid #7c5dfa;
-            padding-left: 1rem;
+            border-left: 4px solid #d4a373;
+            padding-left: 1.25rem;
             font-style: italic;
-            color: #9ca3af;
+            color: #734f2d;
+            background-color: #fdfbf7;
             margin: 1.5rem 0;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-radius: 0 8px 8px 0;
         }
         .prd-content code {
             font-family: 'JetBrains Mono', monospace;
-            background-color: #1e293b;
-            color: #fda4af;
+            background-color: #f5efe6;
+            color: #8c6239;
             padding: 0.2rem 0.4rem;
             border-radius: 0.25rem;
-            font-size: 0.875rem;
+            font-size: 0.85rem;
         }
         .prd-content pre {
             font-family: 'JetBrains Mono', monospace;
-            background-color: #0f172a;
-            padding: 1rem;
-            border-radius: 0.5rem;
+            background-color: #1d1005;
+            color: #f5efe6;
+            padding: 1.25rem;
+            border-radius: 12px;
             overflow-x: auto;
             margin: 1.5rem 0;
-            border: 1px solid #1e293b;
+            border: 1px solid #3d2511;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
         }
         .prd-content pre code {
             background-color: transparent;
-            color: #f1f5f9;
+            color: #e6dfd3;
             padding: 0;
-            font-size: 0.875rem;
+            font-size: 0.85rem;
         }
         .prd-content hr {
             border: 0;
-            border-top: 1px solid #374151;
+            border-top: 2px dashed #e6dfd3;
             margin: 2rem 0;
         }
 
-        /* Glassmorphism scrollbar */
+        /* Chalkboard styled menus */
+        .chalkboard {
+            background-color: #1e251e;
+            border: 8px solid #5c3d21;
+            box-shadow: 0 10px 25px -5px rgba(29, 16, 5, 0.3), inset 0 0 40px rgba(0,0,0,0.8);
+            position: relative;
+        }
+        .chalkboard::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 80%);
+            pointer-events: none;
+        }
+
+        /* Scrollbar customizing */
         ::-webkit-scrollbar {
             width: 8px;
             height: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #0f172a;
+            background: #faf8f5;
         }
         ::-webkit-scrollbar-thumb {
-            background: #334155;
-            border-radius: 4px;
+            background: #e6dfd3;
+            border-radius: 999px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #475569;
+            background: #d4a373;
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col text-slate-100">
+<body class="min-h-screen flex flex-col text-cafe-800">
 
     <!-- Header / Navbar -->
-    <header class="border-b border-slate-800/80 bg-slate-900/60 backdrop-blur-md sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="bg-gradient-to-tr from-brand-500 to-indigo-500 p-2.5 rounded-xl shadow-lg shadow-brand-500/25">
-                    <i class="fa-solid fa-wand-magic-sparkles text-white text-lg"></i>
+    <header class="border-b border-cafe-200/60 bg-white/70 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <div class="bg-cafe-700 p-3 rounded-2xl shadow-md shadow-cafe-800/10 text-white flex items-center justify-center">
+                    <i class="fa-solid fa-mug-hot text-xl"></i>
                 </div>
                 <div>
-                    <h1 class="text-xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-100 to-brand-300 bg-clip-text text-transparent">
-                        Prd-maker
+                    <h1 class="text-2xl font-extrabold tracking-tight font-serif-title text-cafe-900 flex items-center gap-2">
+                        Prd-maker <span class="text-xs font-semibold bg-cafe-100 text-cafe-700 px-2 py-0.5 rounded-full uppercase tracking-wider font-sans border border-cafe-200">Café Edition</span>
                     </h1>
-                    <p class="text-xs font-medium text-brand-400">by Noone-Dev</p>
+                    <p class="text-xs font-semibold text-cafe-500 uppercase tracking-widest mt-0.5">Crafted beautifully by Noone-Dev</p>
                 </div>
             </div>
+
             <div class="flex items-center gap-4">
-                <a href="#about" class="text-sm font-semibold text-slate-400 hover:text-white transition-colors duration-200">
-                    <i class="fa-solid fa-circle-info mr-1.5"></i>Tentang
+                <a href="#menu-specials" class="text-sm font-bold text-cafe-600 hover:text-cafe-800 transition-colors flex items-center gap-1.5">
+                    <i class="fa-solid fa-book-open text-cafe-400"></i> Menu Rekomendasi
                 </a>
-                <span class="h-4 w-px bg-slate-800"></span>
-                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                    <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                    Kilo Gateway Active
+                <span class="h-4 w-px bg-cafe-200"></span>
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-matcha-200/40 text-matcha-700 border border-matcha-500/20">
+                    <span class="h-2 w-2 rounded-full bg-matcha-500 animate-pulse"></span>
+                    Barista Connected
                 </span>
             </div>
         </div>
@@ -202,168 +243,221 @@
     <!-- Main Workspace -->
     <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col lg:flex-row gap-8 overflow-hidden">
 
-        <!-- Left Side: Interactive Input Panel -->
+        <!-- Left Column: The Recipe Book & Controls -->
         <section class="w-full lg:w-5/12 flex flex-col gap-6">
-            <div class="bg-slate-900/40 border border-slate-800/80 rounded-2xl p-6 backdrop-blur-sm flex flex-col gap-5 shadow-2xl">
-                <div>
-                    <h2 class="text-lg font-bold text-white flex items-center gap-2">
-                        <i class="fa-solid fa-sliders text-brand-400"></i> Informasi Produk
-                    </h2>
-                    <p class="text-xs text-slate-400 mt-1">Lengkapi parameter di bawah untuk memicu AI merancang PRD terbaik.</p>
+
+            <!-- main card -->
+            <div class="bg-white border border-cafe-200 rounded-3xl p-6 shadow-xl flex flex-col gap-6 relative overflow-hidden">
+                <div class="absolute top-0 right-0 left-0 h-2 bg-gradient-to-r from-cafe-300 via-cafe-500 to-cafe-700"></div>
+
+                <div class="flex items-start justify-between">
+                    <div>
+                        <h2 class="text-xl font-bold font-serif-title text-cafe-900 flex items-center gap-2">
+                            <i class="fa-solid fa-receipt text-cafe-400"></i> Racikan PRD Baru
+                        </h2>
+                        <p class="text-xs text-cafe-500 mt-1">Sesuaikan bahan-bahan utama produk Anda di lembar resep ini.</p>
+                    </div>
+                    <div class="bg-cafe-50 text-cafe-700 px-3 py-1.5 rounded-xl border border-cafe-200/80 flex items-center gap-1 text-xs font-bold cursor-pointer hover:bg-cafe-100 transition-all" onclick="fillExample()">
+                        <i class="fa-solid fa-wand-magic-sparkles text-cafe-400"></i> Auto-Fill
+                    </div>
                 </div>
 
-                <hr class="border-slate-800">
+                <hr class="border-cafe-100">
 
                 <div class="flex flex-col gap-4">
-                    <!-- Product Name -->
-                    <div>
-                        <label for="productName" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Nama Produk <span class="text-red-400">*</span></label>
-                        <input type="text" id="productName" placeholder="Contoh: EduSmart, AgriChain, HealtyMe"
-                            class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500/40 focus:border-brand-500 transition-all duration-200">
-                    </div>
-
-                    <!-- Category -->
-                    <div>
-                        <label for="category" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Kategori Produk</label>
-                        <select id="category"
-                            class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500/40 focus:border-brand-500 transition-all duration-200">
-                            <option value="SaaS & Productivity">SaaS & Productivity</option>
-                            <option value="E-Commerce & Retail">E-Commerce & Retail</option>
-                            <option value="HealthTech & Wellness">HealthTech & Wellness</option>
-                            <option value="FinTech & Web3">FinTech & Web3</option>
-                            <option value="EdTech & Learning">EdTech & Learning</option>
-                            <option value="Artificial Intelligence / AI Tools">AI Tools & Machine Learning</option>
-                            <option value="Internet of Things (IoT)">IoT / Hardware-Software Integration</option>
-                            <option value="Social Network & Community">Social Network & Community</option>
-                            <option value="Logistics & On-Demand Service">Logistics & On-Demand Service</option>
-                        </select>
+                    <!-- Product Name & Category in 2 Columns -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label for="productName" class="block text-[11px] font-bold text-cafe-600 uppercase tracking-wider mb-1.5">Nama Menu Produk <span class="text-red-500">*</span></label>
+                            <input type="text" id="productName" placeholder="Contoh: EduSmart, AgriChain"
+                                class="w-full bg-cafe-50/60 border border-cafe-200 focus:border-cafe-400 rounded-xl px-4 py-2.5 text-sm text-cafe-900 placeholder-cafe-400 focus:outline-none focus:ring-4 focus:ring-cafe-200/30 transition-all duration-200">
+                        </div>
+                        <div>
+                            <label for="category" class="block text-[11px] font-bold text-cafe-600 uppercase tracking-wider mb-1.5">Kategori Hidangan</label>
+                            <select id="category"
+                                class="w-full bg-cafe-50/60 border border-cafe-200 focus:border-cafe-400 rounded-xl px-4 py-2.5 text-sm text-cafe-900 focus:outline-none focus:ring-4 focus:ring-cafe-200/30 transition-all duration-200">
+                                <option value="SaaS & Productivity">SaaS & Productivity</option>
+                                <option value="E-Commerce & Retail">E-Commerce & Retail</option>
+                                <option value="HealthTech & Wellness">HealthTech & Wellness</option>
+                                <option value="FinTech & Web3">FinTech & Web3</option>
+                                <option value="EdTech & Learning">EdTech & Learning</option>
+                                <option value="AI Tools & Machine Learning">AI Tools & ML</option>
+                                <option value="Internet of Things (IoT)">IoT / Smart Hardware</option>
+                                <option value="Social Network & Chat">Social & Messaging</option>
+                            </select>
+                        </div>
                     </div>
 
                     <!-- Target Audience -->
                     <div>
-                        <label for="targetAudience" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Target Pengguna</label>
-                        <input type="text" id="targetAudience" placeholder="Contoh: Mahasiswa aktif, petani kelapa sawit mandiri, manajer SDM"
-                            class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500/40 focus:border-brand-500 transition-all duration-200">
+                        <label for="targetAudience" class="block text-[11px] font-bold text-cafe-600 uppercase tracking-wider mb-1.5">Target Penikmat (User Segment)</label>
+                        <input type="text" id="targetAudience" placeholder="Contoh: Mahasiswa aktif, petani kelapa sawit swadaya"
+                            class="w-full bg-cafe-50/60 border border-cafe-200 focus:border-cafe-400 rounded-xl px-4 py-2.5 text-sm text-cafe-900 placeholder-cafe-400 focus:outline-none focus:ring-4 focus:ring-cafe-200/30 transition-all duration-200">
+                    </div>
+
+                    <!-- Coffee Strength Selector (Technical Focus Level) -->
+                    <div>
+                        <label class="block text-[11px] font-bold text-cafe-600 uppercase tracking-wider mb-1.5">Kepekatan Hasil Seduhan (Focus Level)</label>
+                        <div class="grid grid-cols-3 gap-3">
+                            <label class="relative flex flex-col items-center p-3 rounded-xl border border-cafe-200 cursor-pointer bg-cafe-50/30 hover:bg-cafe-50 transition-all" id="strength-latte-label">
+                                <input type="radio" name="strength" value="latte" class="absolute top-2.5 right-2.5 text-cafe-500 focus:ring-cafe-400" checked>
+                                <i class="fa-solid fa-mug-saucer text-cafe-400 text-lg mb-1.5"></i>
+                                <span class="text-xs font-bold text-cafe-800">Latte</span>
+                                <span class="text-[9px] text-cafe-500 mt-0.5 text-center leading-tight">User-focused & Flow</span>
+                            </label>
+                            <label class="relative flex flex-col items-center p-3 rounded-xl border border-cafe-200 cursor-pointer bg-cafe-50/30 hover:bg-cafe-50 transition-all" id="strength-cappuccino-label">
+                                <input type="radio" name="strength" value="cappuccino" class="absolute top-2.5 right-2.5 text-cafe-500 focus:ring-cafe-400">
+                                <i class="fa-solid fa-mug-hot text-cafe-400 text-lg mb-1.5"></i>
+                                <span class="text-xs font-bold text-cafe-800">Cappuccino</span>
+                                <span class="text-[9px] text-cafe-500 mt-0.5 text-center leading-tight">Balanced & Rich</span>
+                            </label>
+                            <label class="relative flex flex-col items-center p-3 rounded-xl border border-cafe-200 cursor-pointer bg-cafe-50/30 hover:bg-cafe-50 transition-all" id="strength-espresso-label">
+                                <input type="radio" name="strength" value="espresso" class="absolute top-2.5 right-2.5 text-cafe-500 focus:ring-cafe-400">
+                                <i class="fa-solid fa-glass-water text-cafe-400 text-lg mb-1.5"></i>
+                                <span class="text-xs font-bold text-cafe-800">Espresso</span>
+                                <span class="text-[9px] text-cafe-500 mt-0.5 text-center leading-tight">Ultra Technical</span>
+                            </label>
+                        </div>
                     </div>
 
                     <!-- Core Idea -->
                     <div>
-                        <div class="flex justify-between items-center mb-2">
-                            <label for="coreIdea" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider">Ide Utama & Solusi <span class="text-red-400">*</span></label>
-                            <button onclick="fillExample()" class="text-xs text-brand-400 hover:text-brand-300 transition-colors font-medium flex items-center gap-1">
-                                <i class="fa-solid fa-lightbulb"></i> Gunakan Contoh
-                            </button>
-                        </div>
-                        <textarea id="coreIdea" rows="4" placeholder="Jelaskan secara detail mengenai ide utama aplikasi ini, masalah apa yang ingin diselesaikan, serta bagaimana cara kerjanya..."
-                            class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500/40 focus:border-brand-500 transition-all duration-200 resize-none"></textarea>
+                        <label for="coreIdea" class="block text-[11px] font-bold text-cafe-600 uppercase tracking-wider mb-1.5">Bahan Dasar (Ide Utama & Masalah) <span class="text-red-500">*</span></label>
+                        <textarea id="coreIdea" rows="3" placeholder="Masalah apa yang ingin Anda selesaikan dengan produk ini? Bagaimana solusinya bekerja secara ringkas?"
+                            class="w-full bg-cafe-50/60 border border-cafe-200 focus:border-cafe-400 rounded-xl px-4 py-2.5 text-sm text-cafe-900 placeholder-cafe-400 focus:outline-none focus:ring-4 focus:ring-cafe-200/30 transition-all duration-200 resize-none"></textarea>
                     </div>
 
                     <!-- Key Features -->
                     <div>
-                        <label for="keyFeatures" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Fitur-Fitur Kunci (Opsional)</label>
-                        <textarea id="keyFeatures" rows="3" placeholder="Tuliskan daftar fitur yang wajib ada. Pisahkan dengan baris baru atau koma (misalnya: Login Google, Real-time Dashboard, Export PDF)."
-                            class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500/40 focus:border-brand-500 transition-all duration-200 resize-none"></textarea>
+                        <label for="keyFeatures" class="block text-[11px] font-bold text-cafe-600 uppercase tracking-wider mb-1.5">Bumbu Tambahan (Fitur Kunci)</label>
+                        <textarea id="keyFeatures" rows="2" placeholder="Contoh: Pembayaran Midtrans, Google Login, Real-time sync, PDF Exporter."
+                            class="w-full bg-cafe-50/60 border border-cafe-200 focus:border-cafe-400 rounded-xl px-4 py-2.5 text-sm text-cafe-900 placeholder-cafe-400 focus:outline-none focus:ring-4 focus:ring-cafe-200/30 transition-all duration-200 resize-none"></textarea>
                     </div>
 
                     <!-- Tech Stack -->
                     <div>
-                        <label for="techStack" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Preferensi Tech Stack (Opsional)</label>
-                        <input type="text" id="techStack" placeholder="Contoh: Next.js + Tailwind CSS, NestJS, PostgreSQL"
-                            class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500/40 focus:border-brand-500 transition-all duration-200">
+                        <label for="techStack" class="block text-[11px] font-bold text-cafe-600 uppercase tracking-wider mb-1.5">Wadah Penyajian (Preferensi Tech Stack)</label>
+                        <input type="text" id="techStack" placeholder="Contoh: React + NestJS + PostgreSQL, Next.js + Supabase"
+                            class="w-full bg-cafe-50/60 border border-cafe-200 focus:border-cafe-400 rounded-xl px-4 py-2.5 text-sm text-cafe-900 placeholder-cafe-400 focus:outline-none focus:ring-4 focus:ring-cafe-200/30 transition-all duration-200">
                     </div>
                 </div>
 
-                <hr class="border-slate-800">
+                <hr class="border-cafe-100">
 
-                <button onclick="generatePRD()" id="btnGenerate" class="w-full bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-brand-600/25 transition-all duration-300 flex items-center justify-center gap-2 text-sm uppercase tracking-wider">
-                    <i class="fa-solid fa-gears animate-spin hidden" id="spinner"></i>
-                    <i class="fa-solid fa-sparkles" id="magic-icon"></i>
-                    Generate PRD Premium
+                <button onclick="brewPRD()" id="btnBrew" class="w-full bg-gradient-to-r from-cafe-700 to-cafe-800 hover:from-cafe-600 hover:to-cafe-700 text-white font-bold py-3.5 px-6 rounded-2xl shadow-lg shadow-cafe-800/10 transition-all duration-300 flex items-center justify-center gap-2.5 text-sm uppercase tracking-wider border-b-4 border-cafe-900 active:border-b-0 active:translate-y-1">
+                    <i class="fa-solid fa-circle-notch animate-spin hidden" id="brew-spinner"></i>
+                    <i class="fa-solid fa-mug-hot" id="brew-icon"></i>
+                    Mulai Seduh PRD Anda
                 </button>
             </div>
+
+            <!-- Brew History Sidebar Card -->
+            <div class="bg-cafe-100/40 border border-cafe-200 rounded-3xl p-5 shadow-sm flex flex-col gap-4">
+                <h3 class="text-xs font-bold text-cafe-700 uppercase tracking-wider flex items-center justify-between">
+                    <span><i class="fa-solid fa-clock-rotate-left mr-1.5"></i> Hasil Seduhan Terdahulu</span>
+                    <button onclick="clearHistory()" class="text-[10px] text-red-500 hover:text-red-700 font-bold transition-all"><i class="fa-solid fa-trash-can mr-1"></i> Bersihkan</button>
+                </h3>
+                <div class="flex flex-col gap-2 max-h-36 overflow-y-auto" id="history-container">
+                    <div class="text-xs text-cafe-500 italic text-center py-2">Belum ada draf yang diseduh.</div>
+                </div>
+            </div>
+
         </section>
 
-        <!-- Right Side: Beautiful Interactive Output Screen -->
-        <section class="w-full lg:w-7/12 flex flex-col min-h-[500px] lg:h-[calc(100vh-10rem)] bg-slate-900/20 border border-slate-800/80 rounded-2xl overflow-hidden shadow-2xl relative">
-            
-            <!-- Default Welcome Display -->
-            <div id="welcome-state" class="flex-1 flex flex-col items-center justify-center text-center p-8">
-                <div class="bg-slate-900/60 p-6 rounded-full border border-slate-800/80 mb-6 text-brand-400 relative">
-                    <i class="fa-solid fa-file-invoice text-5xl"></i>
-                    <span class="absolute -top-1 -right-1 bg-brand-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full animate-bounce">AI</span>
+        <!-- Right Column: Interactive Chalkboard & Live Editor Display -->
+        <section class="w-full lg:w-7/12 flex flex-col min-h-[550px] lg:h-[calc(100vh-10rem)] bg-white border border-cafe-200 rounded-3xl overflow-hidden shadow-xl relative">
+
+            <!-- Welcome Café Screen -->
+            <div id="welcome-state" class="flex-1 flex flex-col items-center justify-center text-center p-8 bg-cafe-50/20">
+                <div class="bg-cafe-100 p-6 rounded-full border border-cafe-200/80 mb-6 text-cafe-500 relative">
+                    <i class="fa-solid fa-coffee text-5xl animate-bounce"></i>
+                    <span class="absolute top-2 right-2 flex h-3.5 w-3.5">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cafe-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-cafe-500"></span>
+                    </span>
                 </div>
-                <h3 class="text-xl font-bold text-white mb-2">Prd-maker Premium Engine</h3>
-                <p class="text-slate-400 max-w-md text-sm leading-relaxed mb-6">
-                    Mulai petualangan pembuatan produk Anda di sini. Isi formulir di sebelah kiri dan saksikan AI membuat draf PRD kelas dunia secara instan.
+                <h3 class="text-2xl font-bold font-serif-title text-cafe-900 mb-2">Selamat Datang di Kedai PRD Maker</h3>
+                <p class="text-cafe-600 max-w-md text-sm leading-relaxed mb-6 font-serif italic">
+                    "Tuliskan ide luar biasa Anda di sebelah kiri, biarkan barista AI kami menyeduh spesifikasi produk terlengkap untuk Anda."
                 </p>
                 <div class="grid grid-cols-2 gap-4 max-w-sm w-full">
-                    <div class="bg-slate-900/40 border border-slate-800/50 p-4 rounded-xl text-left">
-                        <i class="fa-solid fa-bolt text-brand-400 mb-2"></i>
-                        <h4 class="text-xs font-bold text-slate-200">Super Cepat</h4>
-                        <p class="text-[11px] text-slate-400 mt-1">Dihasilkan dalam hitungan detik dengan Kilo AI.</p>
+                    <div class="bg-white border border-cafe-200/80 p-4 rounded-2xl text-left shadow-sm">
+                        <i class="fa-solid fa-hourglass text-cafe-400 mb-2 text-lg"></i>
+                        <h4 class="text-xs font-extrabold text-cafe-800">Seduhan Kilat</h4>
+                        <p class="text-[11px] text-cafe-500 mt-1 leading-relaxed">Ekstraksi spesifikasi instan di server Node.js.</p>
                     </div>
-                    <div class="bg-slate-900/40 border border-slate-800/50 p-4 rounded-xl text-left">
-                        <i class="fa-solid fa-diagram-project text-brand-400 mb-2"></i>
-                        <h4 class="text-xs font-bold text-slate-200">Detail & Rinci</h4>
-                        <p class="text-[11px] text-slate-400 mt-1">Arsitektur DB, persona, dan user flow instan.</p>
+                    <div class="bg-white border border-cafe-200/80 p-4 rounded-2xl text-left shadow-sm">
+                        <i class="fa-solid fa-feather-pointed text-cafe-400 mb-2 text-lg"></i>
+                        <h4 class="text-xs font-extrabold text-cafe-800">Draft Premium</h4>
+                        <p class="text-[11px] text-cafe-500 mt-1 leading-relaxed">Dilengkapi dengan tabel, persona, dan database schema.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Loading State -->
-            <div id="loading-state" class="hidden flex-1 flex flex-col items-center justify-center p-8">
-                <div class="relative w-24 h-24 mb-6">
-                    <div class="absolute inset-0 border-4 border-slate-800 rounded-full"></div>
-                    <div class="absolute inset-0 border-4 border-t-brand-500 border-r-indigo-500 rounded-full animate-spin"></div>
-                    <div class="absolute inset-4 bg-slate-950 rounded-full flex items-center justify-center text-brand-400 text-xl">
-                        <i class="fa-solid fa-brain animate-pulse"></i>
+            <!-- Barista Brewing Loading Screen -->
+            <div id="loading-state" class="hidden flex-1 flex flex-col items-center justify-center p-8 bg-cafe-50/40">
+                <div class="relative w-32 h-32 mb-6 flex items-center justify-center">
+                    <div class="absolute inset-0 border-4 border-dashed border-cafe-200 rounded-full animate-spin"></div>
+                    <div class="text-cafe-700 flex flex-col items-center text-center">
+                        <i class="fa-solid fa-mug-hot text-4xl animate-bounce"></i>
+                        <span class="text-[10px] font-bold uppercase tracking-widest mt-1">Brewing</span>
                     </div>
                 </div>
-                <h3 class="text-lg font-bold text-white mb-2" id="loading-title">AI sedang berpikir...</h3>
-                <p class="text-slate-400 text-sm max-w-xs text-center" id="loading-subtitle">
-                    Menganalisis konsep produk dan menyiapkan struktur PRD premium.
+                <h3 class="text-xl font-bold font-serif-title text-cafe-900 mb-2" id="brew-step-label">Barista Sedang Meracik...</h3>
+                <p class="text-cafe-500 text-xs max-w-xs text-center" id="brew-step-sublabel">
+                    Menghubungi Kilo Gateway AI untuk memproses bahan produk Anda.
                 </p>
 
-                <!-- Loading steps micro-status -->
-                <div class="mt-8 w-full max-w-sm flex flex-col gap-2.5">
-                    <div class="flex items-center gap-3 px-4 py-2 bg-slate-900/40 border border-slate-800/50 rounded-xl transition-all duration-300" id="step-1">
-                        <i class="fa-solid fa-circle-check text-emerald-400 text-sm" id="step-1-icon"></i>
-                        <span class="text-xs text-slate-300 font-medium" id="step-1-text">Inisialisasi Parameter Sukses</span>
+                <!-- Cozy baristas loading steps -->
+                <div class="mt-8 w-full max-w-xs flex flex-col gap-2.5">
+                    <div class="flex items-center gap-3 px-4 py-2.5 bg-white border border-cafe-200/60 rounded-xl" id="brew-step-1">
+                        <i class="fa-solid fa-mug-hot text-cafe-400 text-sm animate-pulse" id="brew-step-1-icon"></i>
+                        <span class="text-xs text-cafe-700 font-semibold" id="brew-step-1-text">Menggiling Ide Utama</span>
                     </div>
-                    <div class="flex items-center gap-3 px-4 py-2 bg-slate-900/40 border border-slate-800/50 rounded-xl transition-all duration-300" id="step-2">
-                        <i class="fa-solid fa-spinner animate-spin text-brand-400 text-sm" id="step-2-icon"></i>
-                        <span class="text-xs text-slate-300 font-medium" id="step-2-text">Merumuskan Executive Summary & Persona</span>
+                    <div class="flex items-center gap-3 px-4 py-2.5 bg-white border border-cafe-200/60 rounded-xl opacity-50" id="brew-step-2">
+                        <i class="fa-solid fa-circle text-cafe-300 text-sm" id="brew-step-2-icon"></i>
+                        <span class="text-xs text-cafe-500 font-semibold" id="brew-step-2-text">Mengekstrak Sari Spesifikasi</span>
                     </div>
-                    <div class="flex items-center gap-3 px-4 py-2 bg-slate-900/40 border border-slate-800/50 rounded-xl opacity-50 transition-all duration-300" id="step-3">
-                        <i class="fa-solid fa-circle text-slate-600 text-sm" id="step-3-icon"></i>
-                        <span class="text-xs text-slate-400 font-medium" id="step-3-text">Merancang Arsitektur & Database Schema</span>
+                    <div class="flex items-center gap-3 px-4 py-2.5 bg-white border border-cafe-200/60 rounded-xl opacity-50" id="brew-step-3">
+                        <i class="fa-solid fa-circle text-cafe-300 text-sm" id="brew-step-3-icon"></i>
+                        <span class="text-xs text-cafe-500 font-semibold" id="brew-step-3-text">Menghidangkan di Cangkir PRD</span>
                     </div>
                 </div>
             </div>
 
             <!-- Result State -->
-            <div id="result-state" class="hidden flex-1 flex flex-col h-full overflow-hidden">
+            <div id="result-state" class="hidden flex-1 flex flex-col h-full overflow-hidden bg-white">
                 <!-- Toolbar -->
-                <div class="border-b border-slate-800 bg-slate-900/80 px-6 py-4 flex items-center justify-between">
+                <div class="border-b border-cafe-200 bg-cafe-50/50 px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
                     <div class="flex items-center gap-2">
-                        <span class="h-2 w-2 rounded-full bg-brand-500 animate-ping"></span>
-                        <h3 class="text-sm font-bold text-white">Hasil Draf PRD Anda</h3>
+                        <div class="bg-cafe-600 h-2.5 w-2.5 rounded-full animate-ping"></div>
+                        <h3 class="text-sm font-bold text-cafe-900 font-serif-title">Hasil Seduhan PRD Terbaik</h3>
                     </div>
+
                     <div class="flex items-center gap-2">
+                        <!-- Mode View/Edit Toggle -->
+                        <button onclick="toggleEditMode()" id="btnToggleMode" class="bg-white hover:bg-cafe-50 text-cafe-700 px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 border border-cafe-200">
+                            <i class="fa-solid fa-pen-to-square"></i> <span id="mode-text">Edit Draf</span>
+                        </button>
                         <!-- Copy Button -->
-                        <button onclick="copyToClipboard()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 border border-slate-700">
+                        <button onclick="copyToClipboard()" class="bg-white hover:bg-cafe-50 text-cafe-700 px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 border border-cafe-200">
                             <i class="fa-solid fa-copy"></i> Salin
                         </button>
                         <!-- Download Button -->
-                        <button onclick="downloadMarkdown()" class="bg-brand-600 hover:bg-brand-500 text-white px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 shadow-md shadow-brand-600/15">
-                            <i class="fa-solid fa-download"></i> Unduh Markdown
+                        <button onclick="downloadMarkdown()" class="bg-cafe-700 hover:bg-cafe-600 text-white px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 shadow-md shadow-cafe-700/10">
+                            <i class="fa-solid fa-download"></i> Unduh (.md)
                         </button>
                     </div>
                 </div>
 
-                <!-- Styled Markdown Content View -->
-                <div class="flex-1 overflow-y-auto px-8 py-6 bg-slate-950 prd-content" id="prd-render-area">
-                    <!-- Dynamic PRD content will be injected here -->
+                <!-- Live View Area -->
+                <div class="flex-1 overflow-y-auto px-8 py-6 prd-content" id="prd-view-area">
+                    <!-- Dynamic parsed HTML from marked.js -->
+                </div>
+
+                <!-- Live Raw Editor Area (Hidden by default) -->
+                <div class="flex-1 hidden flex-col p-4 bg-cafe-900 overflow-hidden" id="prd-edit-area">
+                    <textarea id="prd-raw-textarea" class="flex-1 w-full bg-cafe-900 text-cafe-100 font-mono text-sm p-4 border border-cafe-700 rounded-2xl focus:outline-none focus:ring-2 focus:ring-cafe-400 focus:border-cafe-400 resize-none h-full leading-relaxed"></textarea>
                 </div>
             </div>
 
@@ -371,68 +465,129 @@
 
     </main>
 
-    <!-- Project Info Section / About -->
-    <section id="about" class="bg-slate-900/40 border-t border-slate-800 py-12 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-4xl mx-auto text-center">
-            <h3 class="text-lg font-bold text-white mb-2">Mengapa Prd-maker by Noone-Dev?</h3>
-            <p class="text-slate-400 text-sm max-w-2xl mx-auto leading-relaxed mb-6">
-                PRD Maker Premium dirancang khusus untuk mempermudah Product Manager, Founder Startup, dan Developer
-                dalam mentransformasikan ide abstrak menjadi spesifikasi teknis siap bangun dalam sekejap. Didukung oleh
-                Kilo AI universal gateway dengan latensi optimal.
-            </p>
-            <div class="flex justify-center gap-6 text-slate-500 text-xs">
-                <span><i class="fa-solid fa-shield-halved mr-1.5"></i> 100% Secure & Private</span>
-                <span><i class="fa-solid fa-bolt mr-1.5"></i> Instant Generation</span>
-                <span><i class="fa-solid fa-code mr-1.5"></i> Dev-Friendly Output</span>
+    <!-- Interactive Cafe Menu Specials Presets Section -->
+    <section id="menu-specials" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="text-center mb-10">
+            <h2 class="text-3xl font-bold font-serif-title text-cafe-900">Menu Spesial Rekomendasi Barista</h2>
+            <p class="text-cafe-600 text-sm mt-2 max-w-xl mx-auto">Kami menyediakan template racikan siap saji untuk memicu inspirasi produk Anda. Klik salah satu menu di bawah ini!</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- SaaS Latte Card -->
+            <div onclick="selectPreset(0)" class="bg-white border border-cafe-200 hover:border-cafe-400 p-6 rounded-3xl shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer group relative overflow-hidden">
+                <div class="absolute top-0 right-0 bg-cafe-100 group-hover:bg-cafe-200 text-cafe-700 text-[10px] font-bold px-3 py-1 rounded-bl-2xl uppercase transition-colors border-l border-b border-cafe-200">
+                    SaaS Latte
+                </div>
+                <div class="bg-cafe-50 w-12 h-12 rounded-2xl flex items-center justify-center text-cafe-500 group-hover:bg-cafe-700 group-hover:text-white transition-all duration-300 mb-4">
+                    <i class="fa-solid fa-mug-saucer text-xl"></i>
+                </div>
+                <h3 class="text-base font-extrabold text-cafe-900 font-serif-title">EduSmart Portal</h3>
+                <p class="text-xs text-cafe-500 mt-1 leading-relaxed">Aplikasi portal bimbingan konseling dan persiapan ujian adaptif bertenaga AI untuk siswa-siswa SMA.</p>
+                <div class="mt-4 flex items-center gap-1.5 text-xs font-bold text-cafe-600 group-hover:text-cafe-800 transition-colors">
+                    Sajikan Menu Ini <i class="fa-solid fa-chevron-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </div>
+
+            <!-- IoT Espresso Card -->
+            <div onclick="selectPreset(1)" class="bg-white border border-cafe-200 hover:border-cafe-400 p-6 rounded-3xl shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer group relative overflow-hidden">
+                <div class="absolute top-0 right-0 bg-cafe-100 group-hover:bg-cafe-200 text-cafe-700 text-[10px] font-bold px-3 py-1 rounded-bl-2xl uppercase transition-colors border-l border-b border-cafe-200">
+                    IoT Espresso
+                </div>
+                <div class="bg-cafe-50 w-12 h-12 rounded-2xl flex items-center justify-center text-cafe-500 group-hover:bg-cafe-700 group-hover:text-white transition-all duration-300 mb-4">
+                    <i class="fa-solid fa-mug-hot text-xl"></i>
+                </div>
+                <h3 class="text-base font-extrabold text-cafe-900 font-serif-title">TaniTracker System</h3>
+                <p class="text-xs text-cafe-500 mt-1 leading-relaxed">Sistem IoT sensor kelembaban & pH tanah portabel terintegrasi mobile app bagi para petani kelapa sawit.</p>
+                <div class="mt-4 flex items-center gap-1.5 text-xs font-bold text-cafe-600 group-hover:text-cafe-800 transition-colors">
+                    Sajikan Menu Ini <i class="fa-solid fa-chevron-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </div>
+
+            <!-- Fintech Espresso Card -->
+            <div onclick="selectPreset(2)" class="bg-white border border-cafe-200 hover:border-cafe-400 p-6 rounded-3xl shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer group relative overflow-hidden">
+                <div class="absolute top-0 right-0 bg-cafe-100 group-hover:bg-cafe-200 text-cafe-700 text-[10px] font-bold px-3 py-1 rounded-bl-2xl uppercase transition-colors border-l border-b border-cafe-200">
+                    Fintech Roast
+                </div>
+                <div class="bg-cafe-50 w-12 h-12 rounded-2xl flex items-center justify-center text-cafe-500 group-hover:bg-cafe-700 group-hover:text-white transition-all duration-300 mb-4">
+                    <i class="fa-solid fa-glass-water text-xl"></i>
+                </div>
+                <h3 class="text-base font-extrabold text-cafe-900 font-serif-title">KoinKita App</h3>
+                <p class="text-xs text-cafe-500 mt-1 leading-relaxed">Dompet digital mini bagi generasi muda untuk melacak pengeluaran harian dan menabung emas otomatis.</p>
+                <div class="mt-4 flex items-center gap-1.5 text-xs font-bold text-cafe-600 group-hover:text-cafe-800 transition-colors">
+                    Sajikan Menu Ini <i class="fa-solid fa-chevron-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-slate-950 border-t border-slate-900 py-6 text-center text-xs text-slate-500">
+    <footer class="bg-cafe-900 border-t border-cafe-900 py-10 text-center text-xs text-cafe-400">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p>Copyright &copy; 2025 <span class="font-semibold text-slate-300">Prd-maker by Noone-Dev</span>. All rights reserved.</p>
+            <div class="flex items-center gap-2">
+                <div class="bg-cafe-800 p-2 rounded-lg text-white">
+                    <i class="fa-solid fa-mug-hot"></i>
+                </div>
+                <p class="text-left"><span class="font-bold text-cafe-200">Prd-maker by Noone-Dev</span><br><span class="text-[10px] text-cafe-500">Cozy Cafe & Patisserie Specifications Generator</span></p>
+            </div>
+            <p>Copyright &copy; 2025 <span class="font-semibold text-cafe-200">Noone-Dev</span>. All rights reserved.</p>
             <div class="flex items-center gap-4">
-                <span class="hover:text-slate-300 transition-colors cursor-pointer">Privacy Policy</span>
-                <span class="hover:text-slate-300 transition-colors cursor-pointer">Terms of Service</span>
+                <span class="hover:text-cafe-200 transition-colors cursor-pointer">Privacy Policy</span>
+                <span class="hover:text-cafe-200 transition-colors cursor-pointer">Terms of Service</span>
             </div>
         </div>
     </footer>
 
-    <!-- Toast Notifications -->
-    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-12 opacity-0 pointer-events-none transition-all duration-300 bg-emerald-500 text-slate-950 px-4 py-3 rounded-xl shadow-lg flex items-center gap-2.5 font-bold text-sm">
-        <i class="fa-solid fa-circle-check"></i>
-        <span id="toast-message">Draf PRD berhasil disalin ke clipboard!</span>
+    <!-- Cozy Toast Notifications -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-12 opacity-0 pointer-events-none transition-all duration-300 bg-cafe-800 text-white border border-cafe-700 px-5 py-3.5 rounded-2xl shadow-xl flex items-center gap-3 font-semibold text-xs">
+        <i class="fa-solid fa-circle-check text-cafe-300"></i>
+        <span id="toast-message">Hasil seduhan PRD berhasil disalin ke clipboard!</span>
     </div>
 
-    <!-- Script logic -->
+    <!-- Script Logic for Brewing, History, Presets, and live edit modes -->
     <script>
         let generatedPRDText = "";
+        let isEditMode = false;
+        let history = [];
 
-        // Sample Product data for interactive testing/inspiration
-        const examples = [
+        // Load History on Page Load
+        window.addEventListener('DOMContentLoaded', () => {
+            const saved = localStorage.getItem('prd_maker_history');
+            if (saved) {
+                history = JSON.parse(saved);
+                renderHistory();
+            }
+        });
+
+        // Interactive Preset Menus
+        const presets = [
             {
                 name: "EduSmart Portal",
                 category: "EdTech & Learning",
-                audience: "Siswa sekolah menengah atas (SMA) dan guru pembimbing di Indonesia",
-                idea: "Platform pembelajaran bimbingan konseling dan persiapan ujian masuk perguruan tinggi negeri (PTN) yang ditenagai AI. Aplikasi ini merekomendasikan video pembelajaran dan latihan soal secara adaptif berdasarkan analisis kelemahan siswa dalam kuis simulasi mingguan.",
-                features: "- Dashboard Analitik Kemajuan Belajar Siswa\n- Try-Out CBT (Computer Based Test) Adaptif AI\n- Modul Konsultasi Jurusan Kuliah via Chatbot cerdas\n- Ruang diskusi guru dan siswa berbasis real-time chat",
-                stack: "React, Node.js, Express, MongoDB, OpenAI API"
+                audience: "Siswa sekolah menengah atas (SMA) di Indonesia",
+                idea: "Platform pembelajaran bimbingan konseling dan persiapan ujian adaptif bertenaga AI untuk merekomendasikan video pembelajaran berdasarkan kelemahan simulasi try-out siswa.",
+                features: "- Adaptif CBT try-out generator\n- chatbot konseling minat bakat siswa\n- dashboard analisis kelemahan siswa\n- chat real-time guru",
+                stack: "React + Tailwind, Express, PostgreSQL, OpenAI API"
             },
             {
-                name: "TaniTracker",
+                name: "TaniTracker System",
                 category: "Internet of Things (IoT)",
-                audience: "Petani kelapa sawit swadaya mandiri dan koperasi daerah",
-                idea: "Sistem IoT sensor tanah dan cuaca portabel yang terintegrasi dengan aplikasi mobile untuk memantau kesehatan pohon kelapa sawit dan memberikan saran pemupukan yang presisi untuk mencegah kerugian panen.",
-                features: "- Monitoring kelembaban & pH tanah secara real-time\n- Sistem notifikasi peringatan dini hama & penyakit kelapa sawit\n- Kalkulator takaran pemupukan berbasis data sensor\n- Marketplace koperasi untuk penjualan hasil panen langsung",
-                stack: "Flutter, Go, PostgreSQL, MQTT, ESP32"
+                audience: "Petani kelapa sawit swadaya mandiri & koperasi tani daerah",
+                idea: "Sistem IoT sensor kelembaban dan keasaman pH tanah portabel terintegrasi dengan aplikasi mobile untuk melacak kesehatan kelapa sawit secara presisi demi mencegah gagal panen.",
+                features: "- Real-time pH & kelembaban tanah sensor\n- Rekomendasi kadar pemupukan optimal berbasis AI\n- Peringatan cuaca ekstrim & pencegahan hama\n- Koperasi marketplace terpadu",
+                stack: "Flutter, Go, PostgreSQL, MQTT Broker, ESP32"
+            },
+            {
+                name: "KoinKita App",
+                category: "FinTech & Web3",
+                audience: "Generasi muda, siswa, dan mahasiswa yang ingin belajar finansial",
+                idea: "Aplikasi dompet digital mini edukatif untuk melacak pengeluaran keuangan harian, otomatis memotong uang saku bulanan untuk investasi emas digital secara mikro (dari Rp 1.000).",
+                features: "- Pelacak pemasukan dan pengeluaran harian instan\n- Investasi emas mikro otomatis (spare-change saver)\n- Gamifikasi tantangan hemat mingguan\n- Edukasi finansial berbentuk kuis berhadiah",
+                stack: "Next.js, FastAPI, PostgreSQL, Midtrans Payment Gateway"
             }
         ];
 
-        let exampleIndex = 0;
-
-        function fillExample() {
-            const sample = examples[exampleIndex];
+        function selectPreset(index) {
+            const sample = presets[index];
             document.getElementById('productName').value = sample.name;
             document.getElementById('category').value = sample.category;
             document.getElementById('targetAudience').value = sample.audience;
@@ -440,37 +595,45 @@
             document.getElementById('keyFeatures').value = sample.features;
             document.getElementById('techStack').value = sample.stack;
 
-            // Toggle example rotation
-            exampleIndex = (exampleIndex + 1) % examples.length;
+            showToast(`Preset "${sample.name}" berhasil dituangkan ke form!`);
+
+            // Auto scroll to form
+            document.getElementById('productName').scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Beautiful micro-step animation loader
-        function runLoadingAnimations(callback) {
+        function fillExample() {
+            // Randomly select one of the presets
+            const randomIndex = Math.floor(Math.random() * presets.length);
+            selectPreset(randomIndex);
+        }
+
+        // Stepped brewing loader
+        function runBrewingSteps(callback) {
             const steps = [
-                { id: 'step-1', icon: 'fa-circle-check text-emerald-400', text: 'Parameter produk berhasil divalidasi dan disiapkan.' },
-                { id: 'step-2', icon: 'fa-spinner animate-spin text-brand-400', text: 'AI sedang merancang Executive Summary & Target Audience Persona...' },
-                { id: 'step-3', icon: 'fa-circle text-slate-600', text: 'Merancang Functional Requirements & Database Architecture...' }
+                { title: 'Menggiling Biji Ide...', subtitle: 'Menghaluskan parameter dan struktur dasar...', icon: 'fa-solid fa-mug-hot text-cafe-500 animate-bounce' },
+                { title: 'Menyeduh Dengan Air Panas...', subtitle: 'Menyusun Executive Summary, target user, dan flow map...', icon: 'fa-solid fa-water text-indigo-400 animate-pulse' },
+                { title: 'Menambahkan Foam & Latte Art...', subtitle: 'Merinci database schema, fungsional tabel, dan API...', icon: 'fa-solid fa-spoon text-cafe-500 animate-spin' }
             ];
 
             let index = 1;
 
             const interval = setInterval(() => {
                 if (index === 1) {
-                    // Step 1 complete, Step 2 active
-                    document.getElementById('step-1-icon').className = "fa-solid fa-circle-check text-emerald-400";
-                    document.getElementById('step-1').classList.remove('opacity-50');
+                    document.getElementById('brew-step-1-icon').className = "fa-solid fa-circle-check text-matcha-500";
 
-                    document.getElementById('step-2-icon').className = "fa-solid fa-spinner animate-spin text-brand-400";
-                    document.getElementById('step-2').classList.remove('opacity-50');
+                    document.getElementById('brew-step-2-icon').className = "fa-solid fa-spinner animate-spin text-cafe-500";
+                    document.getElementById('brew-step-2').classList.remove('opacity-50');
+                    document.getElementById('brew-step-label').textContent = steps[1].title;
+                    document.getElementById('brew-step-sublabel').textContent = steps[1].subtitle;
                 } else if (index === 2) {
-                    // Step 2 complete, Step 3 active
-                    document.getElementById('step-2-icon').className = "fa-solid fa-circle-check text-emerald-400";
+                    document.getElementById('brew-step-2-icon').className = "fa-solid fa-circle-check text-matcha-500";
 
-                    document.getElementById('step-3-icon').className = "fa-solid fa-spinner animate-spin text-brand-400";
-                    document.getElementById('step-3').classList.remove('opacity-50');
+                    document.getElementById('brew-step-3-icon').className = "fa-solid fa-spinner animate-spin text-cafe-500";
+                    document.getElementById('brew-step-3').classList.remove('opacity-50');
+                    document.getElementById('brew-step-label').textContent = steps[2].title;
+                    document.getElementById('brew-step-sublabel').textContent = steps[2].subtitle;
                 } else if (index === 3) {
-                    // Step 3 complete
-                    document.getElementById('step-3-icon').className = "fa-solid fa-circle-check text-emerald-400";
+                    document.getElementById('brew-step-3-icon').className = "fa-solid fa-circle-check text-matcha-500";
                     clearInterval(interval);
                     if (callback) callback();
                 }
@@ -480,7 +643,7 @@
             return interval;
         }
 
-        async function generatePRD() {
+        async function brewPRD() {
             const productName = document.getElementById('productName').value.trim();
             const category = document.getElementById('category').value;
             const targetAudience = document.getElementById('targetAudience').value.trim();
@@ -488,19 +651,22 @@
             const keyFeatures = document.getElementById('keyFeatures').value.trim();
             const techStack = document.getElementById('techStack').value.trim();
 
+            // Get selected Coffee strength focus
+            const strength = document.querySelector('input[name="strength"]:checked').value;
+
             if (!productName || !coreIdea) {
-                alert('Nama Produk dan Ide Utama / Solusi wajib diisi.');
+                alert('Nama Menu Produk dan Bahan Dasar (Ide Utama) wajib diisi.');
                 return;
             }
 
-            // UI changes to Generation mode
-            const btn = document.getElementById('btnGenerate');
-            const spinner = document.getElementById('spinner');
-            const magicIcon = document.getElementById('magic-icon');
+            // Disable buttons and trigger transitions
+            const btn = document.getElementById('btnBrew');
+            const spinner = document.getElementById('brew-spinner');
+            const brewIcon = document.getElementById('brew-icon');
 
             btn.disabled = true;
             spinner.classList.remove('hidden');
-            magicIcon.classList.add('hidden');
+            brewIcon.classList.add('hidden');
 
             const welcomeState = document.getElementById('welcome-state');
             const loadingState = document.getElementById('loading-state');
@@ -510,14 +676,16 @@
             resultState.classList.add('hidden');
             loadingState.classList.remove('hidden');
 
-            // Reset loading visual elements
-            document.getElementById('step-1-icon').className = "fa-solid fa-spinner animate-spin text-brand-400";
-            document.getElementById('step-2-icon').className = "fa-solid fa-circle text-slate-600";
-            document.getElementById('step-3-icon').className = "fa-solid fa-circle text-slate-600";
-            document.getElementById('step-2').classList.add('opacity-50');
-            document.getElementById('step-3').classList.add('opacity-50');
+            // Reset step elements
+            document.getElementById('brew-step-1-icon').className = "fa-solid fa-spinner animate-spin text-cafe-500";
+            document.getElementById('brew-step-2-icon').className = "fa-solid fa-circle text-cafe-300";
+            document.getElementById('brew-step-3-icon').className = "fa-solid fa-circle text-cafe-300";
+            document.getElementById('brew-step-2').classList.add('opacity-50');
+            document.getElementById('brew-step-3').classList.add('opacity-50');
+            document.getElementById('brew-step-label').textContent = 'Menggiling Biji Ide...';
+            document.getElementById('brew-step-sublabel').textContent = 'Mempersiapkan parameter resep produk Anda...';
 
-            const loadingInterval = runLoadingAnimations();
+            const brewInterval = runBrewingSteps();
 
             try {
                 const response = await fetch('/generate-prd', {
@@ -531,70 +699,176 @@
                         targetAudience,
                         coreIdea,
                         keyFeatures,
-                        techStack
+                        techStack,
+                        strength // Pass the selected style focus to backend
                     })
                 });
 
                 const data = await response.json();
 
                 if (!response.ok) {
-                    throw new Error(data.error || 'Terjadi kesalahan sistem.');
+                    throw new Error(data.error || 'Terjadi gangguan kelistrikan di kedai.');
                 }
 
                 generatedPRDText = data.prd;
 
-                // Stop the manual incremental loading steps, force complete
-                clearInterval(loadingInterval);
-                document.getElementById('step-1-icon').className = "fa-solid fa-circle-check text-emerald-400";
-                document.getElementById('step-2-icon').className = "fa-solid fa-circle-check text-emerald-400";
-                document.getElementById('step-3-icon').className = "fa-solid fa-circle-check text-emerald-400";
-                document.getElementById('step-2').classList.remove('opacity-50');
-                document.getElementById('step-3').classList.remove('opacity-50');
+                // Stop step animation, force all green
+                clearInterval(brewInterval);
+                document.getElementById('brew-step-1-icon').className = "fa-solid fa-circle-check text-matcha-500";
+                document.getElementById('brew-step-2-icon').className = "fa-solid fa-circle-check text-matcha-500";
+                document.getElementById('brew-step-3-icon').className = "fa-solid fa-circle-check text-matcha-500";
+                document.getElementById('brew-step-2').classList.remove('opacity-50');
+                document.getElementById('brew-step-3').classList.remove('opacity-50');
 
-                // Render dynamic markdown using marked.js
-                document.getElementById('prd-render-area').innerHTML = marked.parse(generatedPRDText);
+                // Render in View area and set Raw textarea
+                document.getElementById('prd-view-area').innerHTML = marked.parse(generatedPRDText);
+                document.getElementById('prd-raw-textarea').value = generatedPRDText;
 
+                // Save to local Brew History
+                saveToHistory(productName, category, generatedPRDText);
+
+                // Open Result State
                 setTimeout(() => {
                     loadingState.classList.add('hidden');
                     resultState.classList.remove('hidden');
 
-                    // Reset generate button
+                    // Reset Button
                     btn.disabled = false;
                     spinner.classList.add('hidden');
-                    magicIcon.classList.remove('hidden');
+                    brewIcon.classList.remove('hidden');
                 }, 800);
 
             } catch (error) {
-                clearInterval(loadingInterval);
-                alert('Gagal menghasilkan PRD: ' + error.message);
-                console.error('Generation Error:', error);
+                clearInterval(brewInterval);
+                alert('Gagal menyeduh PRD: ' + error.message);
+                console.error(error);
 
                 loadingState.classList.add('hidden');
                 welcomeState.classList.remove('hidden');
 
-                // Reset generate button
                 btn.disabled = false;
                 spinner.classList.add('hidden');
-                magicIcon.classList.remove('hidden');
+                brewIcon.classList.remove('hidden');
+            }
+        }
+
+        // Save Brew history helper
+        function saveToHistory(name, category, prd) {
+            // Remove duplicates of same product name
+            history = history.filter(item => item.name !== name);
+
+            // Add new history item at start
+            history.unshift({
+                name,
+                category,
+                prd,
+                time: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })
+            });
+
+            // Trim history to maximum 5 items
+            if (history.length > 5) history.pop();
+
+            localStorage.setItem('prd_maker_history', JSON.stringify(history));
+            renderHistory();
+        }
+
+        function renderHistory() {
+            const container = document.getElementById('history-container');
+            if (history.length === 0) {
+                container.innerHTML = `<div class="text-xs text-cafe-500 italic text-center py-2">Belum ada draf yang diseduh.</div>`;
+                return;
+            }
+
+            container.innerHTML = history.map((item, idx) => `
+                <div onclick="loadHistoryItem(${idx})" class="bg-white hover:bg-cafe-50 border border-cafe-200/80 px-3.5 py-2.5 rounded-xl cursor-pointer transition-all flex items-center justify-between text-xs group">
+                    <div class="flex flex-col gap-0.5">
+                        <span class="font-bold text-cafe-800 group-hover:text-cafe-900">${item.name}</span>
+                        <span class="text-[10px] text-cafe-500">${item.category}</span>
+                    </div>
+                    <span class="text-[9px] text-cafe-400 font-bold">${item.time}</span>
+                </div>
+            `).join('');
+        }
+
+        function loadHistoryItem(index) {
+            const item = history[index];
+            generatedPRDText = item.prd;
+
+            // Fill input values for visual consistency
+            document.getElementById('productName').value = item.name;
+            document.getElementById('category').value = item.category;
+
+            // Render
+            document.getElementById('prd-view-area').innerHTML = marked.parse(generatedPRDText);
+            document.getElementById('prd-raw-textarea').value = generatedPRDText;
+
+            // Transition states
+            document.getElementById('welcome-state').classList.add('hidden');
+            document.getElementById('loading-state').classList.add('hidden');
+            document.getElementById('result-state').classList.remove('hidden');
+
+            showToast(`Draf "${item.name}" berhasil ditarik dari lemari sejarah!`);
+        }
+
+        function clearHistory() {
+            if (confirm("Bersihkan seluruh sejarah seduhan terdahulu?")) {
+                history = [];
+                localStorage.removeItem('prd_maker_history');
+                renderHistory();
+                showToast("Sejarah draf berhasil dibersihkan.");
+            }
+        }
+
+        // Live Editor Mode Toggle
+        function toggleEditMode() {
+            const viewArea = document.getElementById('prd-view-area');
+            const editArea = document.getElementById('prd-edit-area');
+            const btnText = document.getElementById('mode-text');
+            const btnIcon = document.querySelector('#btnToggleMode i');
+
+            isEditMode = !isEditMode;
+
+            if (isEditMode) {
+                // Switch to edit mode
+                viewArea.classList.add('hidden');
+                editArea.classList.remove('hidden');
+                btnText.textContent = "Lihat Pratinjau";
+                btnIcon.className = "fa-solid fa-eye";
+
+                // Set textarea size and focus
+                const textarea = document.getElementById('prd-raw-textarea');
+                textarea.focus();
+            } else {
+                // Switch back to rendered HTML mode
+                generatedPRDText = document.getElementById('prd-raw-textarea').value;
+                viewArea.innerHTML = marked.parse(generatedPRDText);
+
+                editArea.classList.add('hidden');
+                viewArea.classList.remove('hidden');
+                btnText.textContent = "Edit Draf";
+                btnIcon.className = "fa-solid fa-pen-to-square";
             }
         }
 
         function copyToClipboard() {
-            if (!generatedPRDText) return;
-            navigator.clipboard.writeText(generatedPRDText).then(() => {
-                showToast("Draf PRD berhasil disalin ke clipboard!");
+            const textToCopy = isEditMode ? document.getElementById('prd-raw-textarea').value : generatedPRDText;
+            if (!textToCopy) return;
+
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                showToast("Hasil racikan PRD berhasil disalin ke clipboard!");
             }).catch(err => {
-                console.error("Gagal menyalin text: ", err);
+                console.error("Gagal menyalin: ", err);
             });
         }
 
         function downloadMarkdown() {
-            if (!generatedPRDText) return;
-            const blob = new Blob([generatedPRDText], { type: 'text/markdown;charset=utf-8;' });
+            const textToDownload = isEditMode ? document.getElementById('prd-raw-textarea').value : generatedPRDText;
+            if (!textToDownload) return;
+
+            const blob = new Blob([textToDownload], { type: 'text/markdown;charset=utf-8;' });
             const url = URL.createObjectURL(blob);
             const link = document.createElement('a');
 
-            // Format filename safely
             const prodName = document.getElementById('productName').value.trim() || 'product';
             const safeName = prodName.toLowerCase().replace(/[^a-z0-9]/g, '_');
 
@@ -604,7 +878,7 @@
             link.click();
             document.body.removeChild(link);
 
-            showToast("Unduhan file PRD (.md) berhasil dimulai!");
+            showToast("Proses download file PRD (.md) dimulai!");
         }
 
         function showToast(message) {
